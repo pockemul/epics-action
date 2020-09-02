@@ -24,6 +24,7 @@ async function updateEpic({ octokit, epic }) {
   const convertedIssueState = issueState === 'closed' ? 'x' : ' ';
   const epicNumber = epic.source.issue.number;
   let epicBody = epic.source.issue.body;
+  let epicTitle = epic.source.issue.title;
 
   const pattern = new RegExp(`- \\[[ |x]\\] .*#${issueNumber}.*`, 'gm');
   const matches = epicBody.matchAll(pattern);
@@ -32,7 +33,16 @@ async function updateEpic({ octokit, epic }) {
   for (const match of matches) {
     epicBody = epicBody.replace(match[0], match[0].replace(/- \[[ |x]\]/, `- [${convertedIssueState}]`));
   }
+ 
+  // replace #xxx () by #xxx (title)
+  const pattern_title = new RegExp(`#${issueNumber} \(.*\)`, 'gm');
+  const matches_title = epicBody.matchAll(pattern_title);
 
+  // eslint-disable-next-line no-restricted-syntax
+  for (const match of matches_title) {
+    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, `( [${epicTitle}]`));
+  }
+  
   const result = await octokit.issues.update({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
