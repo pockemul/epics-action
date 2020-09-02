@@ -38,10 +38,10 @@ async function updateEpic({ octokit, epic }) {
   const pattern_title = new RegExp(`#${issueNumber} \(.*\).*`, 'gm');
   const matches_title = epicBody.matchAll(pattern_title);
 
-    console.log(`OK');
+    console.log('OK');
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches_title) {
-    console.log(`Hello',match[0]);
+    console.log('Hello',match[0]);
     epicBody = epicBody.replace(match[0], match[0].replace(' \(.*\)', ` (${epicTitle})`));
   }
   
@@ -68,7 +68,7 @@ async function run() {
     });
 
 
-    console.log(`START REMY');
+    console.log('START REMY');
     const epics = await getReferencedEpics({ octokit });
     await updateEpics({ octokit, epics });
   } catch (error) {
