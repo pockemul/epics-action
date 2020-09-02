@@ -536,6 +536,7 @@ async function updateEpic({ octokit, epic }) {
   const issueState = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue.state;
   const convertedIssueState = issueState === 'closed' ? 'x' : ' ';
   const epicNumber = epic.source.issue.number;
+  const epicTitle = epic.source.issue.title;
   let epicBody = epic.source.issue.body;
 
   const pattern = new RegExp(`- \\[[ |x]\\] .*#${issueNumber}.*`, 'gm');
