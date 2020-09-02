@@ -67,6 +67,8 @@ async function run() {
       previews: ['mockingbird-preview'],
     });
 
+
+    console.log(`START REMY');
     const epics = await getReferencedEpics({ octokit });
     await updateEpics({ octokit, epics });
   } catch (error) {
