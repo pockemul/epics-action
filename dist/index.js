@@ -534,9 +534,9 @@ async function getReferencedEpics({ octokit }) {
 async function updateEpic({ octokit, epic }) {
   const issueNumber = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue.number;
   const issueState = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue.state;
+  const issueTitle = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue.title;
   const convertedIssueState = issueState === 'closed' ? 'x' : ' ';
   const epicNumber = epic.source.issue.number;
-  const epicTitle = epic.source.issue.title;
   let epicBody = epic.source.issue.body;
 
   const pattern = new RegExp(`- \\[[ |x]\\] .*#${issueNumber}.*`, 'gm');
@@ -555,7 +555,7 @@ async function updateEpic({ octokit, epic }) {
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches_title) {
     console.log('Hello',match[0]);
-    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (${epicTitle})`));
+    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (${issueTitle})`));
   }
 	
   const result = await octokit.issues.update({
