@@ -38,6 +38,7 @@ async function updateEpic({ octokit, epic }) {
   const pattern_title = new RegExp(`#${issueNumber} \(.*\).*`, 'gm');
   const matches_title = epicBody.matchAll(pattern_title);
 
+    console.log(`OK');
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches_title) {
     console.log(`Hello',match[0]);
