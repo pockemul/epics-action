@@ -43,6 +43,7 @@ async function updateEpic({ octokit, epic }) {
   for (const match of matches_title) {
     console.log('Hello',match[0]);
     epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (${epicTitle})`));
+    epicBody += 'TOTO ';
   }
   
   const result = await octokit.issues.update({
