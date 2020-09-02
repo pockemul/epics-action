@@ -31,7 +31,7 @@ async function updateEpic({ octokit, epic }) {
 
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches) {
-    epicBody = epicBody.replace(match[0], match[0].replace(/- \[[ |x]\]/, `- [${convertedIssueState}]`));
+    epicBody = epicBody.replace(match[0], match[0].replace(/- \[[ |x]\]/, `- [${convertedIssueState}] toto`));
   }
  
   // replace #xxx () by #xxx (title)
@@ -43,7 +43,6 @@ async function updateEpic({ octokit, epic }) {
   for (const match of matches_title) {
     console.log('Hello',match[0]);
     epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (${epicTitle})`));
-    epicBody += 'TOTO ';
   }
   
   const result = await octokit.issues.update({
