@@ -10,7 +10,7 @@ inputs:
     default: epic
 runs:
   using: node12
-  main: dist/index.js
+  main: index.js
 branding:
   icon: bookmark
   color: purple
