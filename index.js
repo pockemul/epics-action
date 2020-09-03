@@ -10,7 +10,7 @@ async function getReferencedEpics({ octokit }) {
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     issue_number: github.context.payload.issue.number,
-    per_page: '1000',
+    per_page: '10000',
   });
 
 	console.log('events',events);
