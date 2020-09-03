@@ -4,6 +4,8 @@ const github = require('@actions/github');
 async function getReferencedEpics({ octokit }) {
   const epicLabelName = core.getInput('epic-label-name', { required: true });
 
+	console.log('epic label',epicLabelName);
+
   const events = await octokit.issues.listEventsForTimeline({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
