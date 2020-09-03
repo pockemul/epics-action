@@ -75,7 +75,7 @@ async function run() {
     console.log('START REMY');
     const epics = await getReferencedEpics({ octokit });
 	
-    console.log('START REMY 2');
+    console.log('START REMY 2',epics);
     await updateEpics({ octokit, epics });
   } catch (error) {
     core.error(error);
