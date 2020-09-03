@@ -21,16 +21,18 @@ async function getReferencedEpics({ octokit }) {
 async function updateEpic({ octokit, epic }) {
   const issueNumber = github.context.payload.issue.number;
   const issueState = github.context.payload.issue.state;
+  const issueTitle = github.context.payload.issue.title;
   const convertedIssueState = issueState === 'closed' ? 'x' : ' ';
   const epicNumber = epic.source.issue.number;
   let epicBody = epic.source.issue.body;
-  let epicTitle = epic.source.issue.title;
 
   const pattern = new RegExp(`- \\[[ |x]\\] .*#${issueNumber}.*`, 'gm');
   const matches = epicBody.matchAll(pattern);
 
+    console.log('OK1');
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches) {
+	console.log('match1',match[0]);
     epicBody = epicBody.replace(match[0], match[0].replace(/- \[[ |x]\]/, `- [${convertedIssueState}] toto`));
   }
  
@@ -38,11 +40,11 @@ async function updateEpic({ octokit, epic }) {
   const pattern_title = new RegExp(`#${issueNumber} \\(.*\\).*`, 'gm');
   const matches_title = epicBody.matchAll(pattern_title);
 
-    console.log('OK');
+    console.log('OK2');
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches_title) {
     console.log('Hello',match[0]);
-    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (${epicTitle})`));
+    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (${issueTitle})`));
   }
   
   const result = await octokit.issues.update({
