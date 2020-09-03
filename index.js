@@ -58,6 +58,8 @@ async function updateEpic({ octokit, epic }) {
 }
 
 async function updateEpics({ octokit, epics }) {
+	
+    console.log('START REMY 3');
   return Promise.all(epics.map((epic) => updateEpic({ octokit, epic })));
 }
 
@@ -72,6 +74,8 @@ async function run() {
 
     console.log('START REMY');
     const epics = await getReferencedEpics({ octokit });
+	
+    console.log('START REMY 2');
     await updateEpics({ octokit, epics });
   } catch (error) {
     core.error(error);
