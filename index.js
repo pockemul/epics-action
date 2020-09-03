@@ -6,12 +6,12 @@ async function getReferencedEpics({ octokit }) {
 
 	console.log('epic label',epicLabelName);
 
-  const events = await octokit.issues.listEventsForTimeline({
+  const events = await octokit.paginate(octokit.issues.listEventsForTimeline({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     issue_number: github.context.payload.issue.number,
-    per_page: '10000',
-  });
+    // per_page: '10000',
+  }));
 
 	console.log('events',events);
   const referencedEpics = events.data
