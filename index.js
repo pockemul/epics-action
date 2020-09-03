@@ -12,6 +12,7 @@ async function getReferencedEpics({ octokit }) {
     issue_number: github.context.payload.issue.number,
   });
 
+	console.log('events',events);
   const referencedEpics = events.data
     .filter((item) => (item.event === 'cross-referenced' && item.source))
     .filter((item) => item.source.issue.labels
