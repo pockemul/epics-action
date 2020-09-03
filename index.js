@@ -20,7 +20,7 @@ events = [];
     repo: github.context.repo.repo,
     issue_number: github.context.payload.issue.number,
   }))) {
-	  consol.log('response:',response);
+	  console.log('response:',response);
 	  events.append(response);
 	
    }
