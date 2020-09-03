@@ -6,24 +6,24 @@ async function getReferencedEpics({ octokit }) {
 
 	console.log('epic label',epicLabelName);
 
-events = [];
-  // const events = await octokit.issues.listEventsForTimeline({
-    // owner: github.context.repo.owner,
-    // repo: github.context.repo.repo,
-    // issue_number: github.context.payload.issue.number,
-    // per_page: '10000',
-  // });
-  
-  for await (const response of octokit.paginate.iterator(
-  octokit.issues.listEventsForTimeline({
+  const events = await octokit.issues.listEventsForTimeline({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     issue_number: github.context.payload.issue.number,
-  })))  {
-	  console.log('response: ',response);
-	  events.push(response);
+    per_page: '10000',
+  });
+  
+// events = [];
+  // for await (const response of octokit.paginate.iterator(
+  // octokit.issues.listEventsForTimeline({
+    // owner: github.context.repo.owner,
+    // repo: github.context.repo.repo,
+    // issue_number: github.context.payload.issue.number,
+  // })))  {
+	  // console.log('response: ',response);
+	  // events.push(response);
 	
-   }
+   // }
 
 	console.log('events',events);
   const referencedEpics = events.data
