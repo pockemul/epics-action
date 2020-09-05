@@ -60,7 +60,7 @@ async function updateEpic({ octokit, epic }) {
   // eslint-disable-next-line no-restricted-syntax
   for (const match of matches_title) {
     console.log('Hello',match[0]);
-    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` (**${issueTitle}**)`));
+    epicBody = epicBody.replace(match[0], match[0].replace(/ \(.*\)/, ` ( **_${issueTitle}_** )`));
   }
   
   const result = await octokit.issues.update({
